@@ -8,7 +8,7 @@ echo "Press 1 to place the bet"
   while [[ $userValue == "1" ]]
   do
        random=$((RANDOM%2))
-   if [[ $random -eq 0 ]]
+   if [[ $random -eq $PY_LOST ]]
    then
         echo "you lost $"$BET_AMOUNT
    else

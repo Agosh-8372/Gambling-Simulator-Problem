@@ -7,8 +7,9 @@ PY_WON=1;
 percentStake=$((($STAKE_AMOUNT*50)/100))
 winLimit=$((percentStake+STAKE_AMOUNT))
 loseLimit=$((STAKE_AMOUNT-percentStake))
+dayCount=1;
 
-echo "Press 1 to place the bet"
+echo "Day-$dayCount:Press 1 to place the bet for today"
  read userValue
   while  (($userValue == "1" )) && (( $STAKE_AMOUNT < $winLimit )) && (( $STAKE_AMOUNT > $loseLimit))
   do
@@ -17,12 +18,10 @@ echo "Press 1 to place the bet"
    then
         echo "you lost $"$BET_AMOUNT
          STAKE_AMOUNT=$((STAKE_AMOUNT-1));
-         ((lostToday++))
           echo $lostToday
    else
         echo "you won $"$BET_AMOUNT
          STAKE_AMOUNT=$((STAKE_AMOUNT+1));
-          ((winToday++))
           echo $winToday
    fi
  echo -e "Toatal Amount =$STAKE_AMOUNT\nTo Continue press 1"

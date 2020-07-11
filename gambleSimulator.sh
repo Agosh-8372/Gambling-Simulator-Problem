@@ -5,12 +5,14 @@ PY_LOST=0;
 PERCENT_STAKE=$((($STAKE_AMOUNT*50)/100))
 WIN_LIMIT=$((PERCENT_STAKE+STAKE_AMOUNT))
 LOSE_LIMIT=$((STAKE_AMOUNT-PERCENT_STAKE))
-
 NUM_OF_DAYS=30;
-day=1;
 
-declare -a arr_Win
-declare -a arr_Lose
+sumWin=0;
+sumLose=0;
+amtWin=0;
+amtLose=0;
+#declare -a arr_Win
+#declare -a arr_Lose
 
 function day_WinLoose()
 {
@@ -19,11 +21,15 @@ function day_WinLoose()
 	dayCount=$3
 		if [ $dayWin -gt $dayLose ]
 		then
-			echo "you win today $"$((dayWin-dayLose))
-			 arr_Win[(($dayCount))]=$((dayWin-dayLose))
+			amtWin=$((dayWin-dayLose))
+			echo "you win today $"$amtWin
+			arr_Win[(($dayCount))]=$amtWin
+			sumWin=$((sumWin+amtWin))
 		else
-			echo "you lost today $"$((dayLose-dayWin))
-			arr_Lose[(($dayCount))]=$((dayLose-dayWin))
+			amtLose=$((dayLose-dayWin))
+			echo "you lost today $"$amtLose
+			arr_Lose[(($dayCount))]=$amtLose
+			sumLose=$((sumLose+amtLose))
 		fi
 }
 
@@ -55,6 +61,23 @@ function unLucky()
 		done
 }
 
+function Check()
+{
+	if [ $sumWin -gt $sumLose ]
+	then
+		echo -e "you won this month\nContinuing for next month"
+		day=1;
+      Play
+	else
+		echo "you lost this month....Play stops."
+	fi
+}
+
+function Play()
+{
+declare -a arr_Win
+declare -a arr_Lose
+day=1;
 for((counter=$day;counter<=$NUM_OF_DAYS;counter++))
 do
 	dayWinCount=0;
@@ -64,11 +87,11 @@ do
        	random=$((RANDOM%2))
    			if [[ $random -eq $PY_LOST ]]
    			then
-         		STAKE_AMOUNT=$((STAKE_AMOUNT-1));
-					((dayLostCount++))
+         			STAKE_AMOUNT=$((STAKE_AMOUNT-1));
+						((dayLostCount++))
    			else
-         		STAKE_AMOUNT=$((STAKE_AMOUNT+1));
-					((dayWinCount++))
+         			STAKE_AMOUNT=$((STAKE_AMOUNT+1));
+						((dayWinCount++))
    			fi
  		done
   	day_WinLoose $dayWinCount $dayLostCount $day
@@ -77,8 +100,14 @@ do
 	PERCENT_STAKE=$((($STAKE_AMOUNT*50)/100))
 	WIN_LIMIT=$((PERCENT_STAKE+STAKE_AMOUNT))
 	LOSE_LIMIT=$((STAKE_AMOUNT-PERCENT_STAKE))
+		if [ $counter -eq 30 ]
+		then
+ 			echo -e "Days on which player Won and Amount:\nDay=${!arr_Win[@]}\n${arr_Win[@]}"
+ 			echo -e "Days on which player Lost and Amount:\nDay=${!arr_Lose[@]}\n${arr_Lose[@]}"
+ 			Lucky
+ 			unLucky
+ 			Check
+ 		fi
 done
- echo -e "Days on which player Won and Amount:\nDay=${!arr_Win[@]}\n${arr_Win[@]}"
- echo -e "Days on which player Lost and Amount:\nDay=${!arr_Lose[@]}\n${arr_Lose[@]}"
- Lucky
- unLucky
+}
+ Play

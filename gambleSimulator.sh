@@ -41,9 +41,9 @@ function checkLuckyDay()
 	value=$max
 		for findIndex in "${!arr_Win[@]}"; 
 		do
-   		if [[ "${arr_Win[$findIndex]}" = "${value}" ]]; 
+			if [[ "${arr_Win[$findIndex]}" = "${value}" ]];
 			then
-       		echo -e "\nLucky Day=${findIndex} and Amount Won=$max";
+				echo -e "\nLucky Day=${findIndex} and Amount Won=$max";
    		fi
 		done
 }
@@ -58,10 +58,10 @@ function checkUnluckyDay()
 	value=$min
 		for findMinIndex in "${!arr_Lose[@]}"; 
 		do
-   		if [[ "${arr_Lose[$findMinIndex]}" = "${value}" ]]; 
+   		if [[ "${arr_Lose[$findMinIndex]}" = "${value}" ]];
 			then
-       		echo -e "\nunLucky Day=${findMinIndex} and Amount Lost=$min";
-   		fi
+				echo -e "\nunLucky Day=${findMinIndex} and Amount Lost=$min";
+			fi
 		done
 }
 

@@ -34,31 +34,31 @@ function dayWinLoose()
 function checkLuckyDay()
 {
 	max=50;
-		for findMax in "${arr_Win[@]}" ; 
+		for findMax in "${arr_Win[@]}" ;
 		do
-    		((findMax > max)) && max=$findMax
+			((findMax > max)) && max=$findMax
 		done
 	value=$max
-		for findIndex in "${!arr_Win[@]}"; 
+		for findIndex in "${!arr_Win[@]}";
 		do
 			if [[ "${arr_Win[$findIndex]}" = "${value}" ]];
 			then
 				echo -e "\nLucky Day=${findIndex} and Amount Won=$max";
-   		fi
+			fi
 		done
 }
 
 function checkUnluckyDay()
 {
 	min=50;
-		for findMin in "${arr_Lose[@]}" ; 
+		for findMin in "${arr_Lose[@]}" ;
 		do
-    		((findMin > min)) && min=$findMin
+			((findMin > min)) && min=$findMin
 		done
 	value=$min
-		for findMinIndex in "${!arr_Lose[@]}"; 
+		for findMinIndex in "${!arr_Lose[@]}";
 		do
-   		if [[ "${arr_Lose[$findMinIndex]}" = "${value}" ]];
+			if [[ "${arr_Lose[$findMinIndex]}" = "${value}" ]];
 			then
 				echo -e "\nunLucky Day=${findMinIndex} and Amount Lost=$min";
 			fi
@@ -71,7 +71,7 @@ function checkMonthWinLose()
 	then
 		echo -e "you won this month\nContinuing for next month"
 		day=1;
-      Play
+		Play
 	else
 		echo "you lost this month....Play stops."
 	fi
@@ -86,12 +86,12 @@ day=1;
 	do
 		dayWinCount=0;
 		dayLostCount=0;
-  			while (( $STAKE_AMOUNT < $WIN_LIMIT )) && (( $STAKE_AMOUNT > $LOSE_LIMIT ))
-  			do
+			while (( $STAKE_AMOUNT < $WIN_LIMIT )) && (( $STAKE_AMOUNT > $LOSE_LIMIT ))
+			do
 				random=$((RANDOM%2))
 					if [[ $random -eq $PY_LOST ]]
-   				then
-         			STAKE_AMOUNT=$((STAKE_AMOUNT-1));
+					then
+						STAKE_AMOUNT=$((STAKE_AMOUNT-1));
 						((dayLostCount++))
 					else
 						STAKE_AMOUNT=$((STAKE_AMOUNT+1));

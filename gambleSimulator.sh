@@ -17,18 +17,18 @@ function dayWinLoose()
 dayWin=$1
 dayLose=$2
 dayCount=$3
-	if [ $dayWin -gt $dayLose ]
-	then
-		amtWin=$((dayWin-dayLose))
-		echo "you win today $"$amtWin
-		arr_Win[(($dayCount))]=$amtWin
-		sumWin=$((sumWin+amtWin))
-	else
-		amtLose=$((dayLose-dayWin))
-		echo "you lost today $"$amtLose
-		arr_Lose[(($dayCount))]=$amtLose
-		sumLose=$((sumLose+amtLose))
-	fi
+if [ $dayWin -gt $dayLose ]
+then
+	amtWin=$((dayWin-dayLose))
+	echo "you win today $"$amtWin
+	arr_Win[(($dayCount))]=$amtWin
+	sumWin=$((sumWin+amtWin))
+else
+	amtLose=$((dayLose-dayWin))
+	echo "you lost today $"$amtLose
+	arr_Lose[(($dayCount))]=$amtLose
+	sumLose=$((sumLose+amtLose))
+fi
 }
 
 function checkLuckyDay()
